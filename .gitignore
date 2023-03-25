@@ -1,0 +1,7 @@
+node_modules
+.idea
+package-lock.json
+report
+.vscode
+debug.log
+com.evernote.apk
