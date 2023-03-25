@@ -8,7 +8,7 @@ class Caps {
       'appium:appActivity': 'com.evernote.MainActivity',
       'appium:app':'evernote.apk',
       'appium:platformVersion': '13',
-      'appium:uiautomator2ServerInstallTimeout': 120000,
+      'appium:uiautomator2ServerInstallTimeout': 150000,
       'appium:appWaitForLaunch': true,
       'appium:disableWindowAnimation': true,
       'appium:autoGrantPermissions': true,
