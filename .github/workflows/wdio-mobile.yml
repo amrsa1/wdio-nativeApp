@@ -13,7 +13,7 @@ env:
   EMULATOR_NAME: nexus
 
 jobs:
-  playwright-emulator:
+  wdio-emulator:
     timeout-minutes: 20
     
     runs-on: macos-latest
