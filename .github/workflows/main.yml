@@ -54,3 +54,10 @@ jobs:
         uses: afiore/action-allure-report@v0.1.0
         with:
           results-dir: ./report/allure-results
+             
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+         name: wdio-report
+         path: report/allure-results/
+         retention-days: 3    
