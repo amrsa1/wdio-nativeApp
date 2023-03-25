@@ -11,7 +11,7 @@
     "appium",
     "android",
     "emulator",
-    "wdio",
+    "webdriverIo",
     "mobileAutomationTest"
   ],
   "author": "Amr Salem",
