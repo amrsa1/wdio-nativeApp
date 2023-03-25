@@ -14,7 +14,7 @@ class Caps {
       'appium:autoGrantPermissions': true,
       'appium:clearSystemFiles': true,
       'appium:nativeWebScreenshot': true,
-      'appium:adbExecTimeout': 60000,
+      'appium:adbExecTimeout': 80000,
       'appium:automationName': 'uiautomator2'
     }]
 
