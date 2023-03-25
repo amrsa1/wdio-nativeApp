@@ -79,7 +79,7 @@ export const config: Options.Testrunner = {
     //
     // Default timeout in milliseconds for request
     // if Selenium Grid doesn't send response
-    connectionRetryTimeout: 90000,
+    connectionRetryTimeout: 100000,
     //
     // Default request retries count
     connectionRetryCount: 3,
