@@ -40,8 +40,8 @@ jobs:
           EMULATOR_TIMEOUT=$EMULATOR_TIMEOUT EMULATOR_NAME=$EMULATOR_NAME ./start_emu_headless.sh
           
       - name: Download test app     
-        run: curl -o evernote.apk -C - -L https://dw58.uptodown.com/dwn/hanPc53tLQ8P7osQaj7CpCEPSb8zc9arcGigLXtOM5DZwPTlOALB1vNAnSsfZ4EU6v7CKMRFkwTWfeSBmAEnl2kRCK0dQZ-K-Duer_fM9ZURN92Um4JAjuqiAVj425DO/COIhu4yQizncY8e1HpZXWwPIuQ9peXcgmPJ8H6HC2hhFoISVxparfhm-GcZiX-yAf3oiiJjJaXkOHpijic9n3tNZggSS0x9g8YBWQeZ7TOpARcHLSmJDWUJ_zhYFNNbz/mnmxLV95Mi9fqd7lIEhMPiOsPdWESt9CPZYQd_nNeVW2ibN5LS99o58aOyik3I_DJ0hQvJooIUpDI7BoqnB9yQ==/evernote-10-49.apk
-
+        run: curl -o evernote.apk -C - -L https://dw86.uptodown.com/dwn/vM5iak04_DZcM3Er5WDsk62jTyNtzpdChgrswR8qTnkmFp8eLBr2DjdiWU8nvCjcr_PCg_HUaFwB7rs452GZ5Q49E9Vl3-WQSNqCT0TupifBDDU3weoTu8ln3IEKfQcJ/TF3erI0xGHusrzBveNUsvXGi7Ga49VTViafD5TmW7yrnx3nmSjrqxOROOk_FaB5JqHigO0D73fHqUGVd3LqFt-ENMMYjFcVVoXsHoDWclfzCUbMCkGeTbY-SLOOM1_xY/2aQ4tCx91xTkpSo2_EQK5F0vBq5nOftJobkBpPwVN9wQqhUk_FU8hP6vm1E1bc5-ggzELFlQ0XBXuyO_KLclWQ==/evernote-10-49.apk
+        
       - name: Install dependencies
         run: | 
           npm i
