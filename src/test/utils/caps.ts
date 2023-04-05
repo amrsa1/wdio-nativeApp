@@ -7,7 +7,7 @@ class Caps {
 //       'appium:appPackage': 'com.evernote',
 //       'appium:appActivity': 'com.evernote.MainActivity',
       'appium:app':'./src/test/social-dummy.apk',
-      'appium:platformVersion': '13',
+      'appium:platformVersion': '11',
       'appium:uiautomator2ServerInstallTimeout': 150000,
       'appium:appWaitForLaunch': true,
       'appium:disableWindowAnimation': true,
