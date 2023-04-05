@@ -1,13 +1,14 @@
 import AllureReporter from '@wdio/allure-reporter';
+import { exec } from 'child_process';
 
 
 class NativeApp {
 
     /* =====================================================================  ELEMENTS ============================================================================== */
 
-    get loadingSpinner() { return $('android=.resourceId("com.evernote:id/splash_loading_progress")') }
-    get mainLogo() { return $('~Evernote logo image') }
-    get emailInput() { return $('android=.resourceId("com.evernote:id/landing_email")') }
+    listOption(option: string) { return $(`android=.text("${option}")`) }
+    get bouncingBalls() { return $('android=.text("Bouncing Balls")') }
+    get actionBar() { return $('android=.resourceId("android:id/action_bar")') }
     get contButton() { return $('android=.resourceId("com.evernote:id/continue_button")') }
     get passInput() { return $('android=.resourceId("com.evernote:id/landing_login_password")') }
     get createAccountButton() { return $('android=.resourceId("com.evernote:id/landing_register_button")') }
@@ -28,79 +29,24 @@ class NativeApp {
     /* ========================================================================= ACTIONS ================================================================================ */
 
 
-    async LoginWithCred(email, password) {
-        AllureReporter.addStep('login with username and password')
-        await this.emailField.waitForDisplayed()
-        await this.emailField.setValue(email)
-        try {
-            await this.continue.waitForEnabled()
-            await this.continue.click()
-            await this.password.waitForDisplayed()
-            await this.password.setValue(password)
-            await this.login.click()
-            await this.errorMsg.waitForDisplayed()
-        } catch {
-            await this.contButton.waitForDisplayed()
-            await this.contButton.click()
-            await this.passInput.waitForDisplayed()
-            await this.passInput.setValue(password)
-            await this.signInButton.waitForDisplayed()
-            await this.signInButton.click()
-            await this.errorModal.waitForDisplayed()
-        }
-
+    async selectOption(option: string) {
+        AllureReporter.addStep(`Tab on the following option ${option}`)
+        await this.listOption(option).click()
         return this;
     }
 
-    async verifySplashScreenHasLoaded() {
-        AllureReporter.addStep('Verify spalsh screen has been loaded')
-        await this.loginPage.waitForDisplayed()
-        return this;
+    async resetApp(packageName: string, activityName: string) {
+        const adbCmd = `adb shell pm clear ${packageName}`;
+        const openApp = `adb shell am start -n ${packageName}/${activityName}`;
+        exec(adbCmd, (error) => {
+            if (error) {
+                console.error(`exec error: ${error}`);
+            } else {
+                exec(openApp)
+            }
+
+        });
     }
-
-
-
-
-    async verifyIntroPages() {
-        AllureReporter.addStep('Verify landing page has loaded properly')
-        await this.loadingSpinner.waitForDisplayed()
-        await this.mainLogo.waitForDisplayed()
-        return this;
-    }
-
-    async typeUserEmail(value: string) {
-        AllureReporter.addStep('Type user email')
-        await this.emailInput.setValue(value)
-        await this.contButton.waitForDisplayed()
-        return this;
-    }
-
-    async clickContButton() {
-        AllureReporter.addStep('Click on continue button')
-        await this.contButton.click()
-        // this.createAccountButton.waitForDisplayed()
-        return this;
-    }
-
-    async typeUserPassword(value: string) {
-        AllureReporter.addStep('Type user password')
-        await this.passInput.setValue(value)
-        await this.signInButton.waitForDisplayed()
-        return this;
-    }
-
-    async clickSignInButton() {
-        AllureReporter.addStep('Click on sign in button')
-        await this.signInButton.click()
-        return this;
-    }
-
-    async waitForErrorModal() {
-        AllureReporter.addStep('Wait for error to be displayed')
-        await this.errorModal.waitForDisplayed()
-        return this;
-    }
-
 
 
 }

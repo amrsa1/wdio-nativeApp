@@ -5,20 +5,25 @@ import AllureReporter from '@wdio/allure-reporter';
 
 describe('Native App Test Suite Example', () => {
 
-    it('Splash screen should be loaded', async () => {
+    afterEach(async () => {
+        await NativeApp.resetApp('io.appium.android.apis','io.appium.android.apis.ApiDemos')
+    })
+
+    it('Should be able to select animation for list', async () => {
         AllureReporter.addSeverity('minor')
-        AllureReporter.addStory('By opening the app user will be landed on splash screen')
-        AllureReporter.addDescription('Landing page will contains app logo and cont button', 'text' )
-        await NativeApp.verifySplashScreenHasLoaded()
-        expect(await NativeApp.loginPage).toBeDisplayed()
+        AllureReporter.addStory('Check bouncing balls in animations list')
+        AllureReporter.addDescription('Animations list will be loaded and will contains bouncing balls', 'text')
+        await NativeApp.selectOption('Animation')
+        await expect(NativeApp.bouncingBalls).toBeDisplayed()
     });
 
-    it('Should not be able to login with invalid credentials', async () => {
+    it('Should select AnimateDrawables option from Graphics list', async () => { //Defective
         AllureReporter.addSeverity('minor')
-        AllureReporter.addStory('User should not be able to login with invalid password')
-        AllureReporter.addDescription('Error message will pop up when loging with invalid cred','text')
-        await NativeApp.LoginWithCred('any@anything.com', 'wrong')
-        expect(await NativeApp.errorMsg).toHaveText('The password you entered is incorrect. Please try again.')
+        AllureReporter.addStory('AnimateDrawables option is existing in graphics list')
+        AllureReporter.addDescription('AnimateDrawables option is existing in graphics list', 'text')
+        await NativeApp.selectOption('Graphics')
+        await NativeApp.selectOption('AnimateDrawables')
+        await expect(NativeApp.actionBar).toHaveText('Graphics/AnimateDrawables1')
     });
 
 });
