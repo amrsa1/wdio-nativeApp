@@ -21,10 +21,6 @@
     "type": "git",
     "url": "https://github.com/Amrkamel1/wido-ultimate.git"
   },
-  "dependencies": {
-    "appium": "2.0.0-beta.57",
-    "appium-uiautomator2-driver": "2.14.0"
-  },
   "devDependencies": {
     "@wdio/allure-reporter": "^8.7.0",
     "@wdio/appium-service": "^8.7.0",
