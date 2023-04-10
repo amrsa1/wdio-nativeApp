@@ -2,13 +2,17 @@ name: Wdio-MobileApp-Emulator
 
 on:
   workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
     
 env:
   ANDROID_ARCH: x86_64
   ANDROID_TARGET: google_apis
   API_LEVEL: 33
   ANDROID_BUILD_TOOLS_VERSION: 33.0.2
-  ANDROID_SDK_PACKAGES: system-images;android-33;google_apis;x86_64 platforms;android-30 build-tools;33.0.2 platform-tools emulator
+  ANDROID_SDK_PACKAGES: system-images;android-33;google_apis;x86_64 platforms;android-33 build-tools;33.0.2 platform-tools emulator
   EMULATOR_TIMEOUT: 350
   EMULATOR_NAME: nexus
 
@@ -39,9 +43,6 @@ jobs:
           chmod +x ./start_emu_headless.sh
           EMULATOR_TIMEOUT=$EMULATOR_TIMEOUT EMULATOR_NAME=$EMULATOR_NAME ./start_emu_headless.sh
           
-#      - name: Download test app     
-#       run: curl -o evernote.apk -C - -L https://dw86.uptodown.com/dwn/vM5iak04_DZcM3Er5WDsk62jTyNtzpdChgrswR8qTnkmFp8eLBr2DjdiWU8nvCjcr_PCg_HUaFwB7rs452GZ5Q49E9Vl3-WQSNqCT0TupifBDDU3weoTu8ln3IEKfQcJ/TF3erI0xGHusrzBveNUsvXGi7Ga49VTViafD5TmW7yrnx3nmSjrqxOROOk_FaB5JqHigO0D73fHqUGVd3LqFt-ENMMYjFcVVoXsHoDWclfzCUbMCkGeTbY-SLOOM1_xY/2aQ4tCx91xTkpSo2_EQK5F0vBq5nOftJobkBpPwVN9wQqhUk_FU8hP6vm1E1bc5-ggzELFlQ0XBXuyO_KLclWQ==/evernote-10-49.apk
-      
       - name: Install appium
         run: |
           npm i -g appium@next --unsafe-perm=true --allow-root
@@ -54,15 +55,30 @@ jobs:
       - name: Execute the test
         run: | 
           npm run mobile
-        
+          
       - name: Generate report
-        uses: afiore/action-allure-report@v0.1.0
-        with:
-          results-dir: ./report/allure-results
-             
+        if: always()
+        run: | 
+          npx allure generate report/allure-results    
+         
       - uses: actions/upload-artifact@v3
         if: always()
         with:
          name: wdio-report
-         path: report/allure-results/
-         retention-days: 3    
+         path: ./allure-report
+         retention-days: 3
+         
+      - name: Setup Pages
+        if: always()
+        uses: actions/configure-pages@v3
+        
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './allure-report'
+          
+      - name: Deploy to GitHub Pages
+        if: always()
+        id: deployment
+        uses: actions/deploy-pages@v2

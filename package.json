@@ -1,10 +1,9 @@
 {
-  "name": "wdio-emulator",
+  "name": "wdio-emulator-pipeline",
   "version": "1.0.0",
   "description": "mobile automation framework",
   "scripts": {
-    "cleanReport": "if exist report rmdir report /q /s",
-    "Open-MyReport": "allure serve report/allure-results",
+    "Open-MyReport": "npx allure serve report/allure-results",
     "mobile": "npx wdio src/test/config/mobile.conf.ts"
   },
   "keywords": [
@@ -19,7 +18,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Amrkamel1/wido-ultimate.git"
+    "url": "https://github.com/amrsa1/wdio-nativeApp"
   },
   "devDependencies": {
     "@wdio/allure-reporter": "^8.7.0",
@@ -30,5 +29,8 @@
     "@wdio/spec-reporter": "8.7.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.3"
+  },
+  "dependencies": {
+    "allure-commandline": "^2.21.0"
   }
 }

@@ -3,9 +3,7 @@ class Caps {
     emulator =
     [{
       'appium:platformName': 'android',
-      'appium:deviceName': 'nexus',
-//       'appium:appPackage': 'com.evernote',
-//       'appium:appActivity': 'com.evernote.MainActivity',
+      'appium:deviceName': 'Nexus',
       'appium:app':'./src/test/api.apk',
       'appium:platformVersion': '13',
       'appium:uiautomator2ServerInstallTimeout': 150000,

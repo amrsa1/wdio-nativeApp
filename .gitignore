@@ -5,3 +5,5 @@ report
 .vscode
 debug.log
 com.evernote.apk
+allure-report
+report/allure-results

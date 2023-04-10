@@ -1,12 +1,10 @@
 import NativeApp from '../pages/nativeAppExample';
 import AllureReporter from '@wdio/allure-reporter';
 
-
-
 describe('Native App Test Suite Example', () => {
 
     afterEach(async () => {
-        await NativeApp.resetApp('io.appium.android.apis','io.appium.android.apis.ApiDemos')
+        await browser.resetApp()
     })
 
     it('Should be able to select animation for list', async () => {
@@ -17,13 +15,14 @@ describe('Native App Test Suite Example', () => {
         await expect(NativeApp.bouncingBalls).toBeDisplayed()
     });
 
-    it('Should select AnimateDrawables option from Graphics list', async () => { //Defective
+    it('Should select AnimateDrawables option from Graphics list', async () => {
         AllureReporter.addSeverity('minor')
         AllureReporter.addStory('AnimateDrawables option is existing in graphics list')
         AllureReporter.addDescription('AnimateDrawables option is existing in graphics list', 'text')
         await NativeApp.selectOption('Graphics')
         await NativeApp.selectOption('AnimateDrawables')
-        await expect(NativeApp.actionBar).toHaveText('Graphics/AnimateDrawables1')
+        await browser.takeScreenshot()
+        await expect(NativeApp.title('Graphics/AnimateDrawables')).toBeDisplayed()
     });
 
 });
