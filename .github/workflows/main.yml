@@ -61,13 +61,6 @@ jobs:
         run: | 
           npx allure generate report/allure-results    
          
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-         name: wdio-report
-         path: ./allure-report
-         retention-days: 3
-         
       - name: Setup Pages
         if: always()
         uses: actions/configure-pages@v3
